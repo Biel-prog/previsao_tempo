@@ -1,0 +1,27 @@
+<body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsão do Tempo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Consultar Previsão do Tempo</h1>
+    <form method="post">
+        <input type="text" name="cidade" placeholder="Digite o nome da cidade" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if clima %}
+        {% if clima.erro %}
+            <p>{{ clima.erro }}</p>
+        {% else %}
+            <h2>Tempo em {{ clima.cidade }}</h2>
+            <p>Temperatura: {{ clima.temperatura }}°C</p>
+            <p>Descrição: {{ clima.descricao }}</p>
+            <img src="http://openweathermap.org/img/wn/{{ clima.icone }}@2x.png" alt="Ícone do clima">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
